@@ -14,6 +14,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<!-- html -->
+<%-- jsp --%>
+<% //java %>
+
 메세지 : <%= msg %><br>
 오바지 : <%= i*j %>
 </body>
