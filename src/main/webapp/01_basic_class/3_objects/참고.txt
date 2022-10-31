@@ -1,0 +1,7 @@
+
+HTTP ( Hyper Text Transfer Protocol)
+	  - 웹브라우저와 웹서버 간에 통신하는 규약
+	  
+	  - 특징
+	  	1) Connectionless
+	  	2) Stateless
