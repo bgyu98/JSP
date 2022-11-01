@@ -13,7 +13,6 @@
 <title> 아이디 중복 확인 </title>
 </head>
 <body>
-<% System.out.print(result); %>
 <%
 	if(result) {
 %>

@@ -10,11 +10,20 @@
 <title> 회원가입  </title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+/* $(function(){
+	$('#chk').click(function(){
+		var id = document.frm.id.value;
+		window.open("CheckId.jsp?userId="+id,"","width=200, height=150");
+	})
+	$('#ga').click(function(){
+	})
+}) */
 function openWin(){                        // ID 중복체크 기능
       var id = document.frm.id.value;            // id text 필드의 입력값 가져옴
       window.open("CheckId.jsp?userId="+id,"","width=200, height=150");
       alert(id);// 새 창에서 CheckID 실행
+// 		boolean idChk = CheckId.jsp?userId == id;
+// 		alert(idChk);
 		
    }
    
@@ -41,8 +50,7 @@ function openWin(){                        // ID 중복체크 기능
 				</td>
 				<td width="100">
 				<input type="text" name="id" required>
-				<input type="button" value="중복확인"><br/>
-				<div id='result'></div>
+				<input type="button" value="중복확인" id="chk" onclick="openWin()"><br/>
 				</td>
 			</tr>
 			<tr>

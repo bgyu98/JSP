@@ -113,4 +113,35 @@ public class MemberDao {
          
       return flag;
    }
+   public boolean checkLogin( String id, String pass)throws Exception {
+	
+	   boolean result = false;
+	   
+	   try{
+	    	// 0. 연결 객체 얻어오기
+	          con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+	           // 1. sql 문장 만들기 ( insert문 )
+	          String sql = "SELECT * FROM membertest WHERE id=? AND password=?";
+	           // 2. sql 전송 객체 만들기
+	          ps = con.prepareStatement(sql);
+	          ps.setString(1, id);
+	          ps.setString(2, pass);
+	           // 3. sql 전송
+	          ResultSet rs = ps.executeQuery();
+	          if(rs.next()) result = true;
+	          else result = false;
+	          System.out.println(rs + "행을 실행하였습니다.");
+	           // 4. 객체 닫기
+	          rs.close();
+	          ps.close();
+	          con.close();
+	    			 
+	         
+	      }catch( Exception ex ){
+	         throw new MemberException("중복아이디 검사시 오류  : " + ex.toString() );         
+	      }
+	   
+	   return result;
+	   
+   }
 }
