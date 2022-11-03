@@ -47,11 +47,6 @@ $(function(){
 		    }else if(pw != rePw){
 		    	 $('#ga').attr('disabled', true);
 		    }
-		   	  $.ajax({
-		         type : 'get',
-		         url  : 'pwCheck.jsp',
-		         data : {id : $("input[name='id']").val(),pw : $("input[name='password']").val()},
-		         dataType : 'text'
         })
         
 // 		$('#idchk').click(function(){

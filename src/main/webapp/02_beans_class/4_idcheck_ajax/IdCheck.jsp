@@ -4,6 +4,11 @@
 <%
 String id = request.getParameter("id");
 
+if(id == "" || id == "null") {
+    out.print("1");
+    return;
+ }
+
 MemberDao dao = MemberDao.getInstance();
 boolean idChk = dao.isDuplicatedId(id);
 
