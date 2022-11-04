@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import board_ex.model.BoardException;
+import board_ex.model.BoardVO;
+
 public class MessageDao {
 
 	// Single Pattern 
@@ -242,6 +245,47 @@ public class MessageDao {
 			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
 		}			
 	}
+	//--------------------------------------------
+		//#####	 게시글번호에 의한 레코드 검색하는 함수
+		public Message selectById(int message_id) throws MessageException
+		{
+			Connection	 		con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			
+			Message rec = new Message();
+			
+			try{
+				String url = "jdbc:oracle:thin:@192.168.0.46:1521:xe";
+				String user = "scott";
+				String pass = "tiger";
+				con = DriverManager.getConnection(url, user, pass);				// * sql 문장만들기
+				String sql = "SELECT message_id, message, guest_name, password FROM guesttb WHERE message_id=?";
+				// * 전송객체 얻어오기
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, message_id);
+				// * 전송하기
+				rs = ps.executeQuery();
+				// * 결과 받아 BoardVO변수 rec에 지정하기
+				while(rs.next()) {
+
+				rec.setGuestName(rs.getString("GUEST_NAME"));
+				rec.setMessage(rs.getString("MESSAGE"));
+				rec.setPassword(rs.getString("PASSWORD"));
+				
+				}
+
+				
+				
+				return rec;
+			}catch( Exception ex ){
+				throw new MessageException("게시판 ) DB에 글번호에 의한 레코드 검색시 오류  : " + ex.toString() );	
+			} finally{
+				if( rs   != null ) { try{ rs.close();  } catch(SQLException ex){} }
+				if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+				if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+			}		
+		}
 	
 	/*
 	 * 메세지 번호와 비밀번호에 의해 메세지 삭제
@@ -280,4 +324,5 @@ public class MessageDao {
 			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
 		}		
 	}
+	
 }
