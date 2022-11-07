@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommentMapper">
+	<select id="selectComment" resultType="Comment">
+		select *
+		from comment_tab
+		<!-- db 컬럼명과 vo의 변수명이 다르면 별칭처리
+		그렇지 않으려면 , 설계시 db 컬럼과 vo변수명을 동일하게 -->
+	</select>
+	
+	<select id="selectCommentByPK" parameterType="hashmap" resultType="Comment">
+		select *
+		from comment_tab
+		where comment_no=#{commentNo}
+	</select>
+
+	<insert id="insertComment" parameterType="Comment">
+	insert into comment_tab 
+	values(#{commentNo}, #{userId}, #{commentContent}, sysdate)
+	</insert>
+	
+	<delete id="deleteComment" parameterType="Comment">
+	DELETE FROM COMMENT_TAB WHERE comment_no=#{commentNo}
+	</delete>	
+	
+	<update id="updateComment" parameterType="Comment">
+	update comment_tab 
+	set user_id=#{userId}, comment_content=#{commentContent}
+	where comment_no=#{comment_no}
+	</update>
+</mapper>
